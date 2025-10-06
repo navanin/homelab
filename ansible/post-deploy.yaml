@@ -1,0 +1,52 @@
+---
+- name: Post-deploy VM config
+  hosts: vms
+  become: true
+  tasks:
+    - name: Disable IPv6 via sysctl
+      ansible.posix.sysctl:
+        name: "{{ item }}"
+        value: '1'
+        state: present
+        reload: true
+      loop:
+        - net.ipv6.conf.all.disable_ipv6
+        - net.ipv6.conf.default.disable_ipv6
+
+    - name: Add new hostname to /etc/hosts
+      ansible.builtin.lineinfile:
+        path: /etc/hosts
+        line: "127.0.1.1 {{ inventory_hostname }}"
+        state: present
+
+    - name: Set VM hostname
+      ansible.builtin.hostname:
+        name: "{{ inventory_hostname }}"
+
+    - name: Set preserve_hostname to true
+      ansible.builtin.lineinfile:
+        path: /etc/cloud/cloud.cfg
+        regexp: '^preserve_hostname:'
+        line: 'preserve_hostname: true'
+        state: present
+
+    - name: Add navanin to docker group
+      ansible.builtin.user:
+        name: navanin
+        groups: docker
+        append: true
+
+    - name: Ensure OS is up to date
+      ansible.builtin.apt:
+        update_cache: true
+        upgrade: full
+      register: apt_out
+
+    - name: Check if reboot required
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: pending_reboot
+
+    - name: Reboot if required to apply any updates
+      ansible.builtin.reboot:
+      when: "'linux-image' in apt_out.stdout or pending_reboot.stat.exists"
