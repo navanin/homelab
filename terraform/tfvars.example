@@ -1,0 +1,40 @@
+# Provider Variables
+# Proxmox Instance (e.g. https://pve.example.com:443)
+virtual_environment_endpoint        = ""
+# Proxmox API Token
+virtual_environment_api_token       = ""
+# Proxmox SSH Username
+virtual_environment_ssh_username    = ""
+# Proxmox SSH Password
+virtual_environment_ssh_password    = ""
+
+# Network variables
+# DNS lookup Domain
+network_dns_domain                  = ""
+# Network IPv4 prefix (e.g. 192.168.1.)
+network_ip4                         = ""
+# Network IPv4 subnet mask
+network_ip4_mask                    = ""
+# Network IPv4 gateway last octet
+network_ip4_gateway_addr            = ""
+# Network IPv4 DNS last octet
+network_ip4_dns_addr                = ""
+
+# PVE variables
+# PVE Target Node Name
+pve_default_node                    = ""
+
+# Cloud Init variables
+# Timezone for VMs
+cloud_init_timezone                 = "Europe/Moscow"
+# Username for VMs
+cloud_init_username                 = ""
+# Username's password for VMs (openssl passwd -6 <your_password>)
+cloud_init_passwd_hash              = ""
+# Username's ssh public key for VMs
+cloud_init_ssh_key                  = ""
+
+# USB Devices
+# USB Devices (e.g 8087:0029)
+zigbee_dongle                       = ""
+bluetooth                           = ""
