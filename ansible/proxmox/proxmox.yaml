@@ -26,7 +26,7 @@
     - name: Save the extracted Token to a file
       ansible.builtin.copy:
         content: "{{ token.stdout_lines | select('search', '│ value        │') | first | regex_replace('.*│ value        │ ([^ ]+).*', '\\1') }}"
-        dest: ./pve_terraform.token
+        dest: ./pve_terraform_token.creds
         mode: '0600'
       delegate_to: localhost
       become: false
@@ -35,5 +35,5 @@
       ansible.builtin.debug:
         msg:
           - "Attention!"
-          - "Token is saved to a local file - ./pve_terraform.token"
-          - "Open it in a file editor OR use 'cat ./pve_terraform.token'"
+          - "Token is saved to a local file - ./pve_terraform_token.creds"
+          - "Open it in a file editor OR use 'cat ./pve_terraform_token.creds'"
