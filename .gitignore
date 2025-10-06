@@ -1,0 +1,6 @@
+# Ansible
+*.creds
+# Terraform
+terraform/.terraform*
+terraform/*.tfstate*
+terraform/*.tfvars

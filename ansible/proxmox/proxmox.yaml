@@ -1,0 +1,39 @@
+---
+- name: Prepare PVE node for Terraform
+  hosts: proxmox
+  become: true
+  vars:
+    proxmox_api_token: "terraform"
+
+  tasks:
+    # Since bpg/proxmox terraform provider uses ssh to manage some kinds of resources, we have to add our key to PVE node
+    - name: Create authorized_keys for root user
+      ansible.posix.authorized_key:
+        user: root
+        state: present
+        key: "{{ ssh_pubkey }}"
+
+    # We have to use snippets to store cloud-init files
+    - name: Allow "Snippets" content in "local" storage
+      ansible.builtin.command: >
+        pvesm set local --content images,rootdir,vztmpl,backup,iso,snippets
+
+    - name: Create API token for terraform
+      ansible.builtin.command: >
+        pveum user token add root@pam {{ proxmox_api_token }} --comment "Ansible Managed. Token for terraform"
+      register: token
+
+    - name: Save the extracted Token to a file
+      ansible.builtin.copy:
+        content: "{{ token.stdout_lines | select('search', '│ value        │') | first | regex_replace('.*│ value        │ ([^ ]+).*', '\\1') }}"
+        dest: ./pve_terraform_token.creds
+        mode: '0600'
+      delegate_to: localhost
+      become: false
+
+    - name: Token information
+      ansible.builtin.debug:
+        msg:
+          - "Attention!"
+          - "Token is saved to a local file - ./pve_terraform_token.creds"
+          - "Open it in a file editor OR use 'cat ./pve_terraform_token.creds'"
