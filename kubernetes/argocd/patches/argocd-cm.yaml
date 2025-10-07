@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-    labels:
-        app.kubernetes.io/name: argocd-cm
-        app.kubernetes.io/part-of: argocd
-    name: argocd-cm
+  labels:
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cm
 data:
-    kustomize.buildOptions: --enable-helm
-    repositories: |
-        - name: homelab
-          type: git
-          url: https://github.com/navanin/homelab.git
+  kustomize.buildOptions: --enable-helm
+  repositories: |
+    - name: deployments
+      type: git
+      url: https://github.com/navanin/homelab.git
