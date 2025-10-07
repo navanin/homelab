@@ -1,26 +1,12 @@
-apiVersion: ENC[AES256_GCM,data:8I0=,iv:FvCi375I5iLP4TmXnA/Ksl3h0QJ9GXornmTWfIQaqPY=,tag:mb1Nqhbo83megSQw1IzZxg==,type:str]
-kind: ENC[AES256_GCM,data:IyjKEzlm08xJ,iv:ODJVHfV9e+aXjS2ytKu83PA4WD9aaDjyTcVj7J0lTZU=,tag:xcvHX3vuFUL2KDnWxiDT1w==,type:str]
+apiVersion: v1
+kind: ConfigMap
 metadata:
     labels:
-        app.kubernetes.io/name: ENC[AES256_GCM,data:pSDbutfOutOA,iv:6nrB5g8PtiaMChlBXu5egqqunahaVSGpmvuZawmDdcs=,tag:GIrbnDeqaNqZq+GNnEHIrQ==,type:str]
-        app.kubernetes.io/part-of: ENC[AES256_GCM,data:EpM80rB4,iv:tL2DcW+ZoCjgie44XTYcp4b7vZsAfW7MmJbIhj7nRYs=,tag:+EULpXNiqgWuYxr5Myx3KQ==,type:str]
-    name: ENC[AES256_GCM,data:IXjNp8R2ydzc,iv:Vd3daJ5UvzyFWtMoDHJRtn4u1gx8b+S3XnniKoyCGY4=,tag:WUueI9HG01yofZ9mRdho+A==,type:str]
+        app.kubernetes.io/name: argocd-cm
+        app.kubernetes.io/part-of: argocd
+    name: argocd-cm
 data:
-    kustomize.buildOptions: ENC[AES256_GCM,data:aEjA1Qzwm8M54chO5g==,iv:EjOhB3hUS6z/DZDal0hs/eIgK9gn4jZCVrCIIBABHGE=,tag:KSb9w4GKUHERKHuYjg/rDQ==,type:str]
-    repositories: ENC[AES256_GCM,data:wEcyQfGKTVVbWw/tKbXT3ly8xAWF+OLufwlP7GF/R4ROnm47LmTATpnqm+IOMWEZjlcj1Bfqq4NYiHIm8Xp7TiSmQNfCY5qsDpT7/T4wzjxBbnhO6DaVOXBtOMLDyO7Q3mTCvXJtop1yOhUQLcdVrLljKXNs+zEyfZsYZK+Pg0ZVB1CY2srN7y/UBD4hA6CIdmpAYxi9SxE7lyPiuYQLHLexm3qi+bIAu5PoWkJY0pWRgu8z9Gn/3uXEn8XXdEjkpu6T91s0dsQ=,iv:QREoOeYeMHrPTm1QZ+dAXX79npKXygldRipD+bxd4xo=,tag:nfFkLMbAUKBGC/1pAg5Bsw==,type:str]
-    url: ENC[AES256_GCM,data:9D6p35VWmX0+IxXDsrlbm8wYI3M7CeV+CP4P,iv:riGF1DMuuCE+Ytg+ztyLDllz72q3TYHXcdN6ceelS5k=,tag:jdvU7Q13xnQQITF2KvgBlw==,type:str]
-sops:
-    age:
-        - recipient: age1rmh2k7m2djuypt4wk0075aaek3kun3xyc55jdln2t24evp385ujs97p4ne
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSByVmZNY3ViN3F4MmVZSnFz
-            aldBR2RzeE14YUJZdlpldUVIeFl0eG1mNlNzClpuSkxYNGVoL0lqcG9FUEVaOGtk
-            RmVuZmxVWS9QUGl2TWpBNHhwSURiOWsKLS0tIEJIbEVBM1c0SGZoclpvNEw2MFo3
-            WHZvMHhqdU81NldaYWpBQ2JEcHBTdGsKCl8EOl8MEzei0D80z2T0w8bCVJMpo4/o
-            V9Dr9UlSIDxChodNXWBFIFCTB3WX5L5AjOhLtEZ5OifS9OVoBjv7+A==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-10-06T15:44:03Z"
-    mac: ENC[AES256_GCM,data:Alp+9ZQ2aMETjFHeNF+k6PYCJMXasD7TwvAy0EPUh9sBySCkLGP4UMZsxZaNowOpckz0JT6AHoD464tx7APN91nvpAoBRDP6sqOWEYhNIYE6HbhEZl411Ch/JuApcVbA2zgowKjYZvmE+th27zu9izZBcL3vn/OMAIohVOQHmoQ=,iv:TAPEGKv5th09SrQELHc44tXU2bkSTy9ba7dNMwoakTg=,tag:7/3vdwKqglNn4W2+AMsRyg==,type:str]
-    unencrypted_suffix: _unencrypted
-    version: 3.11.0
+    kustomize.buildOptions: --enable-helm
+    repositories: |
+        type: git
+        url: https://github.com/navanin/homelab.git
