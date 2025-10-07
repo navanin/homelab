@@ -12,3 +12,7 @@ sops -e -a <AGE_PUBLIC_KEY> test.yaml > test.enc.yaml
 SOPS_AGE_KEY=<AGE_SECRET_KEY> sops <file>
 # В тот же файл
 SOPS_AGE_KEY=<AGE_SECRET_KEY> sops -d -i <file>
+
+# Список зашифрованных файлов в репозитории
+ansible/_hosts/inventory.yaml
+kubernetes/argocd/patches/argocd-cm.yaml

@@ -1,4 +1,5 @@
 # Ansible
+.ansible
 *.creds
 # Terraform
 terraform/.terraform*

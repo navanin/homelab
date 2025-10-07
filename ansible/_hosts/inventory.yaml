@@ -3,43 +3,40 @@ all:
         proxmox:
             hosts:
                 pve:
-                    ansible_host: ENC[AES256_GCM,data:wwGTGvSK3UrjAA==,iv:/aG1iTx4YPu2P1L7L0VVOwL1bUf1Xpg+xoxs8Rz3ME8=,tag:5VI5Bo/Hhnf4fIVxWgCUAQ==,type:str]
-                    ansible_user: ENC[AES256_GCM,data:89HEfw==,iv:LJc5UTwd7pZTXUmBvKHMqvW6OSftQpa13WiCCLipBt4=,tag:s9V//Dqy91bMMAwqUuOPhg==,type:str]
-        vms:
+                    ansible_host: ENC[AES256_GCM,data:bAxDHg5uqsRPaA==,iv:OaHnTvOrImrnVlnjngCFtgBbpOWY/x77tOP2ij2zqYU=,tag:TjesaZBoA4YpE2Ep9fSl7Q==,type:str]
+                    ansible_user: ENC[AES256_GCM,data:RYKpAA==,iv:QNSWzxwko6dwadQWyGDMX6cmQ10w3xUdjr8SiSxHnJ8=,tag:+lawoxlhvGUYnpgdUJ44LA==,type:str]
+        k8s_cluster:
             children:
-                k8s:
+                kube_control_plane:
+                    hosts:
+                        k8s-master:
+                            ansible_host: ENC[AES256_GCM,data:i1q11+LQTrNv0lk=,iv:n4npDnzmUWEwKr7m8va6N2KAN6vBam3AoCgjC69ZYpc=,tag:2WA+nPrE+ToKRA3K1sGV+Q==,type:str]
+                            etcd_member_name: ENC[AES256_GCM,data:YaQ0cH4+,iv:octVhqay/LA5Kuoh8JZVIanAmXfnu5tIQFWQSw3r6Nk=,tag:Q9Mfkg0rYtaWbzmR7P11xA==,type:str]
+                kube_node:
+                    hosts:
+                        k8s-worker-01:
+                            ansible_host: ENC[AES256_GCM,data:LGn+mcz7iv/dTb4=,iv:fhVXQI1cQad9TbWwpeURpR6pMpPMTZrh3GteUWXDw+8=,tag:NZ86d55+fsaq1LnhZf+sbQ==,type:str]
+                        k8s-worker-02:
+                            ansible_host: ENC[AES256_GCM,data:xTLJxIyvs78uMoc=,iv:iWbOjuvUPbOJ740iXb3HM5a2veyXjlA3ZoOwsuV5YLM=,tag:32eawNZFPNyKzD0tZ2CYHg==,type:str]
+                        k8s-worker-03:
+                            ansible_host: ENC[AES256_GCM,data:pcJdqQ9u/UIMqOc=,iv:gkwIcUMGsIegd8HUW/fHxFl/mkMAIXvv8pnqd+bV5HI=,tag:nw+TbE3Ec1k1I8Ensx0gzw==,type:str]
+                etcd:
                     children:
-                        kube_control_plane:
-                            hosts:
-                                k8s-master:
-                                    ansible_host: ENC[AES256_GCM,data:m0SpT7JNMZr4fJ8=,iv:OCZGYiXSltKEjz7tlIm1VuL0fPqqYiWB4kO8puFVHQU=,tag:PxEMwhZPJFQPtQYUo1T8ug==,type:str]
-                                    etcd_member_name: ENC[AES256_GCM,data:gJU4t/Ky,iv:OxtOwc77JKPMS3QNKE+3b3z+PngkFHkhS/fWw28shCs=,tag:/0TinH+af0bdtjKJtL5j8Q==,type:str]
-                        kube_node:
-                            hosts:
-                                k8s-worker-01:
-                                    ansible_host: ENC[AES256_GCM,data:A0ds0kLRvSLRPl0=,iv:xS7FwLwazQDrstzOj8Y7kGMNtETUxEsqT0dsifb8fCc=,tag:VNFWcUYJFaN2coGPKlfyKQ==,type:str]
-                                k8s-worker-02:
-                                    ansible_host: ENC[AES256_GCM,data:Aab1QiBfr6baRT0=,iv:S5smTccGSosuBw2i3iv0+doGn5Tqksd9Y9rYAjG86VU=,tag:vSSP0p3VqAj4NwWlGMdLDw==,type:str]
-                                k8s-worker-03:
-                                    ansible_host: ENC[AES256_GCM,data:13YDGFP9vI2xwWw=,iv:1KG1oFfL2l0KvBZ9sU+fx3mbSPF7KpIu6RhsRgSM8+Y=,tag:Y7WE41s8OYzjRqGWOf7OEg==,type:str]
-                        etcd:
-                            children:
-                                kube_control_plane: {}
-    vars:
-        ssh_pubkey: ENC[AES256_GCM,data:Hg3DNEHH2MFrtQ0xyBwQcYXwdMas0B1DbsGB27oaKGIyxvbYcBovTnl1YJ7cDCgNPWjwdeozrPvRaH8M//5W5L7is/CBqSnVNyDfF1PT2NtKvPMo40h2RQ==,iv:Vsrs3rBHRQRUf/kIy85ubk6dmJnV9J9Ob2Gze41ZRZ0=,tag:uZ7DgzsR88CBZ3TInengdw==,type:str]
-        domain: ENC[AES256_GCM,data:6D1UtznED/3cMsJsTw==,iv:PepARS/bo4Gie5uTY/YamYC8imusmBMFul9kDRHCnsg=,tag:5Ii0xvTZNoYRRCHDVMIPZg==,type:str]
+                        kube_control_plane: null
+            vars:
+                ssh_pubkey: ENC[AES256_GCM,data:JjykjqJrk4yHyC9Dlc7JrWc+VpiLTvWIwU5vGKPuNJkMvibx3KKi8OCLT9Hol4bsTjbcCiLOHApVgoD0apA18qmqGKl7JDv1upmp0VLHSKvto8mq7upYJQ==,iv:Zh52F5mS+EgEDcCNHUXyoSCPe9ez3p8iqyq7NaA2yls=,tag:/RVdDLFWh8MGoppici8zvw==,type:str]
 sops:
     age:
         - recipient: age1rmh2k7m2djuypt4wk0075aaek3kun3xyc55jdln2t24evp385ujs97p4ne
           enc: |
             -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSA0OGpDOXduWWlNb0ZoMDRm
-            KzF1aFVYZ0llZnZOWnFqait3cW1GSDQ4Y2xnCnB2Ty9vMlBDb0dkNi96UVhlR0Rr
-            eEdsQmt3djNMNlA3UXdTa1hpV0tZUUkKLS0tIEFScDVQMHFReGc3ckRaUXoraVJC
-            by9BTUlRN1laVCtOdC92SDdKV2tHNEkK348nfIViPFddhWRL8TAzSMMGXTY7sQ06
-            qLvShcu9Ik5W73hDjndQxMioU0qOWJpjYtzDwO18RMcgZTnu/CotVQ==
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6Slk1a3d6ckhLS2YxNUk0
+            bWtTVHl1VEJSQ2sxc1JRbW1NVExMaC9hSTN3CnkzL09od3JwL1psdkZrMlBTNEVz
+            VzBROFp3cTNETVlIU01KRTFLVWZ3bDAKLS0tIFMyM1JwV0dKcXVzUWxrZFFzdFdt
+            SFZ0KzFEVm1XS0ZxQ2cwbUY0UDBIcjAKCFC7iYVQehMAQ6TyZKhz3fr/rJBP0py+
+            2R6n8WDGI/S2oHrqrZ4Aeii4XcKWooiLRzRYtwJvpOLeSG5n5/VvlQ==
             -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-10-06T15:02:00Z"
-    mac: ENC[AES256_GCM,data:sOsx7gzmTAG0/ufeJOCxlR57cAxSpxHGbI+G5yMx6tNJQnYteORYiXdFwB5lW3TQAMh/U8jhI6bwUoULDoQDHGbIeTPqby5vVPN5Yhc6MxtjzZ3cb6Kr1UDAAtIwTMwH7IgKYzmvN/VO1BuZJ+NBHawnUCEzSFRK0UUEmmcUz0M=,iv:i+1iMS9R/Oh3Yh9KoGo5ecZN1VaCOTgMH24PxCERX6g=,tag:4wn1r+/4I23EUtwrkp19eQ==,type:str]
+    lastmodified: "2025-10-07T11:26:57Z"
+    mac: ENC[AES256_GCM,data:iDdDjNpW3KpVz2zRGsqKsH35hZB9LDpPZh+tY0ZMq+8NLmXTHLyVq7s5PHpKBg/nfjJ5yZpOVU8s2TZHRQLTC+KAptG+Shm5s0tntaTJGMgyF2CsyX5K2WBJGZsY297jnhzkSxlQr6vKPXunWxAVXH5nBEruftJMn5Q9AGXqj3s=,iv:cS61NYyvQhme9aub5+AFiBr5Za/HXECmjYApd6ZfiSM=,tag:edhSKMyOrjmRz7byaOr9kw==,type:str]
     unencrypted_suffix: _unencrypted
     version: 3.11.0
