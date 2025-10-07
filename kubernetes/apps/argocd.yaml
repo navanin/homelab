@@ -11,7 +11,7 @@ spec:
   source:
     path:  kubernetes/argocd
     repoURL: https://github.com/navanin/homelab.git
-    targetRevision: HEAD
+    targetRevision: gitops-k8s
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
