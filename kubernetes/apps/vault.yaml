@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+  namespace: argocd
+spec:
+  project: homelab
+  source:
+    chart: vault
+    repoURL: https://helm.releases.hashicorp.com
+    targetRevision: 0.31.0
+    helm:
+      releaseName: vault
+      values: |
+        server:
+          dataStorage:
+            size: 5Gi
+            storageClass: null
+          standalone:
+            enabled: true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: vault
