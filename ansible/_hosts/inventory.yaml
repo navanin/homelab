@@ -3,40 +3,25 @@ all:
         proxmox:
             hosts:
                 pve:
-                    ansible_host: ENC[AES256_GCM,data:bAxDHg5uqsRPaA==,iv:OaHnTvOrImrnVlnjngCFtgBbpOWY/x77tOP2ij2zqYU=,tag:TjesaZBoA4YpE2Ep9fSl7Q==,type:str]
-                    ansible_user: ENC[AES256_GCM,data:RYKpAA==,iv:QNSWzxwko6dwadQWyGDMX6cmQ10w3xUdjr8SiSxHnJ8=,tag:+lawoxlhvGUYnpgdUJ44LA==,type:str]
+                    ansible_host: 10.30.0.50
+                    ansible_user: root
         k8s_cluster:
             children:
                 kube_control_plane:
                     hosts:
                         k8s-master:
-                            ansible_host: ENC[AES256_GCM,data:i1q11+LQTrNv0lk=,iv:n4npDnzmUWEwKr7m8va6N2KAN6vBam3AoCgjC69ZYpc=,tag:2WA+nPrE+ToKRA3K1sGV+Q==,type:str]
-                            etcd_member_name: ENC[AES256_GCM,data:YaQ0cH4+,iv:octVhqay/LA5Kuoh8JZVIanAmXfnu5tIQFWQSw3r6Nk=,tag:Q9Mfkg0rYtaWbzmR7P11xA==,type:str]
+                            ansible_host: 10.30.0.200
+                            etcd_member_name: master
                 kube_node:
                     hosts:
                         k8s-worker-01:
-                            ansible_host: ENC[AES256_GCM,data:LGn+mcz7iv/dTb4=,iv:fhVXQI1cQad9TbWwpeURpR6pMpPMTZrh3GteUWXDw+8=,tag:NZ86d55+fsaq1LnhZf+sbQ==,type:str]
+                            ansible_host: 10.30.0.201
                         k8s-worker-02:
-                            ansible_host: ENC[AES256_GCM,data:xTLJxIyvs78uMoc=,iv:iWbOjuvUPbOJ740iXb3HM5a2veyXjlA3ZoOwsuV5YLM=,tag:32eawNZFPNyKzD0tZ2CYHg==,type:str]
+                            ansible_host: 10.30.0.202
                         k8s-worker-03:
-                            ansible_host: ENC[AES256_GCM,data:pcJdqQ9u/UIMqOc=,iv:gkwIcUMGsIegd8HUW/fHxFl/mkMAIXvv8pnqd+bV5HI=,tag:nw+TbE3Ec1k1I8Ensx0gzw==,type:str]
+                            ansible_host: 10.30.0.203
                 etcd:
                     children:
                         kube_control_plane: null
             vars:
-                ssh_pubkey: ENC[AES256_GCM,data:JjykjqJrk4yHyC9Dlc7JrWc+VpiLTvWIwU5vGKPuNJkMvibx3KKi8OCLT9Hol4bsTjbcCiLOHApVgoD0apA18qmqGKl7JDv1upmp0VLHSKvto8mq7upYJQ==,iv:Zh52F5mS+EgEDcCNHUXyoSCPe9ez3p8iqyq7NaA2yls=,tag:/RVdDLFWh8MGoppici8zvw==,type:str]
-sops:
-    age:
-        - recipient: age1rmh2k7m2djuypt4wk0075aaek3kun3xyc55jdln2t24evp385ujs97p4ne
-          enc: |
-            -----BEGIN AGE ENCRYPTED FILE-----
-            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSB6Slk1a3d6ckhLS2YxNUk0
-            bWtTVHl1VEJSQ2sxc1JRbW1NVExMaC9hSTN3CnkzL09od3JwL1psdkZrMlBTNEVz
-            VzBROFp3cTNETVlIU01KRTFLVWZ3bDAKLS0tIFMyM1JwV0dKcXVzUWxrZFFzdFdt
-            SFZ0KzFEVm1XS0ZxQ2cwbUY0UDBIcjAKCFC7iYVQehMAQ6TyZKhz3fr/rJBP0py+
-            2R6n8WDGI/S2oHrqrZ4Aeii4XcKWooiLRzRYtwJvpOLeSG5n5/VvlQ==
-            -----END AGE ENCRYPTED FILE-----
-    lastmodified: "2025-10-07T11:26:57Z"
-    mac: ENC[AES256_GCM,data:iDdDjNpW3KpVz2zRGsqKsH35hZB9LDpPZh+tY0ZMq+8NLmXTHLyVq7s5PHpKBg/nfjJ5yZpOVU8s2TZHRQLTC+KAptG+Shm5s0tntaTJGMgyF2CsyX5K2WBJGZsY297jnhzkSxlQr6vKPXunWxAVXH5nBEruftJMn5Q9AGXqj3s=,iv:cS61NYyvQhme9aub5+AFiBr5Za/HXECmjYApd6ZfiSM=,tag:edhSKMyOrjmRz7byaOr9kw==,type:str]
-    unencrypted_suffix: _unencrypted
-    version: 3.11.0
+                ssh_pubkey: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC4W3rAh7Ygy7ljq2aTL5pRtNSDNtHBjuPgDk6ub7AMC navanin
