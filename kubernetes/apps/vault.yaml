@@ -18,6 +18,9 @@ spec:
             storageClass: null
           standalone:
             enabled: true
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
   destination:
     server: "https://kubernetes.default.svc"
     namespace: vault
