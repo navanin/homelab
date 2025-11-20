@@ -1,0 +1,21 @@
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vault-vservice
+  namespace: vault
+spec:
+  gateways:
+  - istio-system/ingressgateway
+  hosts:
+  - "vault.internal.navanin.tech"
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: vault
+        port:
+          number: 8200

@@ -1,0 +1,21 @@
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: longhorn-vservice
+  namespace: longhorn
+spec:
+  gateways:
+  - istio-system/ingressgateway
+  hosts:
+  - "longhorn.internal.navanin.tech"
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: longhorn-frontend
+        port:
+         number: 80

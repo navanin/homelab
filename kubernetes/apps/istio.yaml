@@ -1,0 +1,63 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: istio
+  namespace: argocd
+spec:
+  project: homelab
+  sources:
+    - repoURL: https://istio-release.storage.googleapis.com/charts # Istio Base chart
+      chart: base
+      targetRevision: 1.28.0
+      helm:
+        releaseName: istio-base
+        values: |
+          defaultRevision: default
+    - repoURL: https://istio-release.storage.googleapis.com/charts # Istiod chart
+      chart: istiod
+      targetRevision: 1.28.0
+      helm:
+        releaseName: istiod
+        values: |
+          global:
+            istioNamespace: istio-system
+            proxy:
+              clusterDomain: "cluster.local"
+          meshConfig:
+            rootNamespace: "istio-system"
+            accessLogEncoding: "JSON"
+            accessLogFile: "/dev/stdout"
+            trustDomain: "cluster.local"
+    - repoURL: https://istio-release.storage.googleapis.com/charts # Istio Ingress Gateway chart
+      chart: gateway
+      targetRevision: 1.28.0
+      helm:
+        releaseName: ingressgateway
+        values: |
+          name: ingressgateway-external
+          labels:
+            istio: ingressgateway
+          service:
+            type: "LoadBalancer"
+            loadBalancerIP: "10.30.0.210"
+            ports:
+            - name: http
+              port: 80
+              protocol: TCP
+              targetPort: 8080
+            - name: https
+              port: 443
+              protocol: TCP
+              targetPort: 8443
+    - repoURL: https://github.com/navanin/homelab.git # Additional manifests
+      path:  kubernetes/istio
+      targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: istio-system
