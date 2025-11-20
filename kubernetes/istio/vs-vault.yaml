@@ -7,7 +7,7 @@ metadata:
   namespace: vault
 spec:
   gateways:
-  - istio-system/ingressgateway
+  - istio-system/gateway
   hosts:
   - "vault.internal.navanin.tech"
   http:
