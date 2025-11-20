@@ -1,0 +1,21 @@
+
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: argocd-vservice
+  namespace: argocd
+spec:
+  gateways:
+  - istio-system/ingressgateway
+  hosts:
+  - "argocd.internal.navanin.tech"
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: argocd-server
+        port:
+          number: 80
