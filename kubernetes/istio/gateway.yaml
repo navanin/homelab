@@ -13,4 +13,6 @@ spec:
       number: 80
       protocol: HTTP
     hosts:
+      - "argocd.internal.navanin.tech"
+      - "longhorn.internal.navanin.tech"
       - "vault.internal.navanin.tech"
