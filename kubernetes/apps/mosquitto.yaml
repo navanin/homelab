@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mosquitto
+  namespace: argocd
+spec:
+  destination:
+    namespace: mosquitto
+    server: https://kubernetes.default.svc
+  project: homelab
+  source:
+    path:  kubernetes/mosquitto
+    repoURL: https://github.com/navanin/homelab.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      selfHeal: true
