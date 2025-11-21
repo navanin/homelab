@@ -6,17 +6,12 @@ resources:
 - github.com/argoproj/argo-cd/manifests/cluster-install?ref=stable
 - resources/app-of-apps-application.yaml
 - resources/AppProject.yaml
-# ArgoCD Vault Plugin
-- resources/cmp-plugin.yaml
-# - resources/avp-secret.yaml
 
 patches:
 # Base
 - path: patches/argocd-cm.yaml
 - path: patches/argocd-cmd-params-cm.yaml
 - path: patches/service.yaml
-# ArgoCD Vault Plugin
-- path: patches/argocd-repo-server.yaml
 # Cosmetics
 # Revision History Limit
 - target:
