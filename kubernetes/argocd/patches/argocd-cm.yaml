@@ -6,6 +6,7 @@ metadata:
     app.kubernetes.io/part-of: argocd
   name: argocd-cm
 data:
+  accounts.navanin: login
   kustomize.buildOptions: --enable-helm
   repositories: |
     - name: homelab

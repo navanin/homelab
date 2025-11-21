@@ -6,6 +6,11 @@ resources:
 - github.com/argoproj/argo-cd/manifests/cluster-install?ref=stable
 - resources/app-of-apps-application.yaml
 - resources/AppProject.yaml
+- resources/cmp-plugin.yaml # ArgoCD Vault Plugin
+
+# ArgoCD Vault Plugin
+patchesStrategicMerge:
+- argocd-repo-server.yaml
 
 patches:
 # Base

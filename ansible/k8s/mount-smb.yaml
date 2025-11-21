@@ -1,0 +1,33 @@
+# Mount SMB Share to master node
+---
+- name: Mount SMB share for Vault backups
+  hosts: k8s-master
+  become: true
+
+  vars:
+    smb_server: "10.30.0.254"
+    smb_share: "share"
+    mount_point: "/mnt/share"
+    smb_domain: "WORKGROUP"
+    smb_opts: "guest,domain=WORKGROUP,vers=3.0"
+
+  tasks:
+    - name: Install cifs-utils
+      ansible.builtin.apt:
+        name: cifs-utils
+        state: present
+        update_cache: true
+
+    - name: Ensure mount point directory exists
+      ansible.builtin.file:
+        path: "{{ mount_point }}"
+        state: directory
+        mode: "0755"
+
+    - name: Mount SMB share and add to fstab
+      ansible.builtin.mount:
+        path: "{{ mount_point }}"
+        src: "//{{ smb_server }}/{{ smb_share }}"
+        fstype: cifs
+        opts: "{{ smb_opts }}"
+        state: mounted
