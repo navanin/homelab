@@ -23,7 +23,7 @@ spec:
       containers:
       - name: avp
         command: [/var/run/argocd/argocd-cmp-server]
-        image: cto-docker-public.pkg.sbercloud.tech/argocd-vault-plugin
+        image: quay.io/argoproj/argocd:v2.7.9
         securityContext:
           runAsNonRoot: true
           runAsUser: 999
@@ -46,7 +46,7 @@ spec:
             name: cmp-plugin
       - name: avp-kustomize
         command: [/var/run/argocd/argocd-cmp-server]
-        image: cto-docker-public.pkg.sbercloud.tech/argocd-vault-plugin
+        image: quay.io/argoproj/argocd:v2.7.9
         securityContext:
           runAsNonRoot: true
           runAsUser: 999
@@ -69,7 +69,7 @@ spec:
             name: cmp-plugin
       - name: avp-helm
         command: [/var/run/argocd/argocd-cmp-server]
-        image: cto-docker-public.pkg.sbercloud.tech/argocd-vault-plugin
+        image: quay.io/argoproj/argocd:v2.7.9
         securityContext:
           runAsNonRoot: true
           runAsUser: 999
