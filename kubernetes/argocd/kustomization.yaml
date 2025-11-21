@@ -8,15 +8,13 @@ resources:
 - resources/AppProject.yaml
 - resources/cmp-plugin.yaml # ArgoCD Vault Plugin
 
-# ArgoCD Vault Plugin
-patchesStrategicMerge:
-- argocd-repo-server.yaml
-
 patches:
 # Base
 - path: patches/argocd-cm.yaml
 - path: patches/argocd-cmd-params-cm.yaml
 - path: patches/service.yaml
+# ArgoCD Vault Plugin
+- path: argocd-repo-server.yaml
 # Cosmetics
 # Revision History Limit
 - target:
