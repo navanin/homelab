@@ -20,8 +20,8 @@ spec:
             enabled: true
             config: |-
               ui = true
-              cluster_name = homelab
-              max_lease_ttl = 87600h
+              cluster_name = "homelab"
+              max_lease_ttl = "87600h"
               listener "tcp" {
                 tls_disable = 1
                 address = "[::]:8200"
