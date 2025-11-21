@@ -8,7 +8,7 @@ resources:
 - resources/AppProject.yaml
 # ArgoCD Vault Plugin
 - resources/cmp-plugin.yaml
-- resources/avp-secret.yaml
+# - resources/avp-secret.yaml
 
 patches:
 # Base

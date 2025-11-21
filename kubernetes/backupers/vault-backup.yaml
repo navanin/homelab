@@ -16,7 +16,7 @@ metadata:
   name: vault-backuper
   namespace: backupers
 spec:
-  schedule: "0 3 * * *"
+  schedule: "0 7 * * 0"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
