@@ -5,10 +5,10 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "-2"
     avp.kubernetes.io/path: /homelab/data/kubernetes/backupers
-  name: vault-token
+  name: vault-backuper
   namespace: backupers
 stringData:
-  vault-raft-token: <VAULT_RAFT_TOKEN>
+  VAULT_TOKEN: <VAULT_RAFT_TOKEN>
 ---
 apiVersion: batch/v1
 kind: CronJob
