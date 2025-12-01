@@ -12,6 +12,8 @@ spec:
     path:  kubernetes/backupers
     repoURL: https://github.com/navanin/homelab.git
     targetRevision: HEAD
+    plugin:
+      name: argocd-vault-plugin
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
