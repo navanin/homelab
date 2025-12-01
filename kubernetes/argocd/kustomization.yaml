@@ -13,7 +13,7 @@ patches:
 - path: patches/argocd-cmd-params-cm.yaml
 - path: patches/service.yaml
 # ArgoCD Vault Plugin
-- path: patches/argocd-repo-server.yaml
+- path: patches/argocd-repo-server-deploy.yaml
 # Cosmetics
 # Revision History Limit
 - target:
