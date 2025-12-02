@@ -75,8 +75,8 @@ spec:
                   export VAULT_TOKEN
                   export VAULT_SKIP_VERIFY="${VAULT_SKIP_VERIFY:-}"
 
-                  TS="$(date +%Y%m%d)"
-                  SNAPSHOT_FILE="${BACKUP_DIR}/vault-raft-${TS}.snap"
+                  TS="$(date +%F-%H-%M-%S)"
+                  SNAPSHOT_FILE="${BACKUP_DIR}/raft-${TS}.snap"
 
                   vault operator raft snapshot save "${SNAPSHOT_FILE}"
                   ls -1t "${BACKUP_DIR}"/vault-raft-*.snap 2>/dev/null | \
