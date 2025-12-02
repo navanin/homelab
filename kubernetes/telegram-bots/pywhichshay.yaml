@@ -58,6 +58,8 @@ spec:
               value: "Вильдан Маратович"
             - name: DB_NAME
               value: "sqlite.db"
+            - name: TZ
+              value: "Europe/Moscow"
           resources:
             requests:
               cpu: 50m
