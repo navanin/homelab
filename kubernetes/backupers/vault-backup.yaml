@@ -82,6 +82,7 @@ spec:
                   ls -1t "${BACKUP_DIR}"/vault-raft-*.snap 2>/dev/null | \
                     tail -n +$((RETENTION + 1)) | \
                     xargs -r rm -f || true
+                  echo "Created backup $SNAPSHOT_FILE"
 
           volumes:
             - name: share
