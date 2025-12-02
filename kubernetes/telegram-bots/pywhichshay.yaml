@@ -1,0 +1,78 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: pywhichshay-secret
+  namespace: telegram-bots
+  annotations:
+    argocd.argoproj.io/sync-wave: "-2"
+    avp.kubernetes.io/path: /homelab/data/kubernetes/pywhichshay
+type: Opaque
+stringData:
+  API_ID: <API_ID>
+  API_HASH: <API_HASH>
+  TOKEN: <TOKEN>
+  TARGET_CHAT_ID: <TARGET_CHAT_ID>
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pywhichshay
+  namespace: telegram-bots
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pywhichshay
+  template:
+    metadata:
+      labels:
+        app: pywhichshay
+    spec:
+      containers:
+        - name: pywhichshay
+          image: ghcr.io/navanin/pywhichshay:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: API_ID
+              valueFrom:
+                secretKeyRef:
+                  name: pywhichshay-secret
+                  key: API_ID
+            - name: API_HASH
+              valueFrom:
+                secretKeyRef:
+                  name: pywhichshay-secret
+                  key: API_HASH
+            - name: TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: pywhichshay-secret
+                  key: TOKEN
+            - name: TARGET_CHAT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: pywhichshay-secret
+                  key: TARGET_CHAT_ID
+            - name: DEFAULT_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: pywhichshay-config
+                  key: DEFAULT_NAME
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: pywhichshay-config
+                  key: DB_NAME
+            - name: DEFAULT_NAME
+              value: "Вильдан Маратович"
+            - name: DB_NAME
+              value: "sqlite.db"
+          resources:
+            requests:
+              cpu: 50m
+              memory: 128Mi
+            limits:
+              cpu: 300m
+              memory: 512Mi
+      restartPolicy: Always

@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: telegram-bots
+  namespace: argocd
+spec:
+  destination:
+    namespace: telegram-bots
+    server: https://kubernetes.default.svc
+  project: homelab
+  source:
+    path:  kubernetes/telegram-bots
+    repoURL: https://github.com/navanin/homelab.git
+    targetRevision: HEAD
+    plugin:
+      name: argocd-vault-plugin
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      selfHeal: true
