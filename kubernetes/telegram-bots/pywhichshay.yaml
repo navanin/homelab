@@ -55,16 +55,6 @@ spec:
                   name: pywhichshay-secret
                   key: TARGET_CHAT_ID
             - name: DEFAULT_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: pywhichshay-config
-                  key: DEFAULT_NAME
-            - name: DB_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: pywhichshay-config
-                  key: DB_NAME
-            - name: DEFAULT_NAME
               value: "Вильдан Маратович"
             - name: DB_NAME
               value: "sqlite.db"
